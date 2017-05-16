@@ -5,7 +5,19 @@
 Const $displayHeight = @DesktopHeight
 Const $displayWidth = @DesktopWidth
 
-HotKeySet("{LWIN}!{LEFT}",halves(1))
+HotKeySet("#!{LEFT}", left)
+HotKeySet("#!{RIGHT}", right)
+HotKeySet("#!{UP}", top)
+HotKeySet("#!{DOWN}", bottom)
+HotKeySet("#!u", topLeft)
+HotKeySet("#!i", topRight)
+HotKeySet("#!J", BottomLeft)
+HotKeySet("#!k", bottomRight)
+HotKeySet("#!d", leftThird)
+HotKeySet("#!e", leftTwoThird)
+HotKeySet("#!f", centerThird)
+HotKeySet("#!g", rightThird)
+HotKeySet("#!t", rightTwoThird)
 
 Opt("TrayMenuMode", 3) ; The default tray menu items will not be shown and items are not checked when selected. These are options 1 and 2 for TrayMenuMode.
 
@@ -30,8 +42,8 @@ Func Main()
 	Local $leftThird = TrayCreateItem("Left Third" & @TAB & "Win+Alt+D") ; Postion 1
 	Local $leftTwoThirds = TrayCreateItem("Left Two Thirds" & @TAB & "Win+Alt+E") ; Postion 2
 	Local $centerThird = TrayCreateItem("Center Third" & @TAB & "Win+Alt+F") ; Postion 3
-	Local $rightThird = TrayCreateItem("Right Third" & @TAB & "Win+Alt+T") ; Postion 4
-	Local $rightTwoThirds = TrayCreateItem("Right Two Thirds" & @TAB & "Win+Alt+G") ; Postion 5
+	Local $rightThird = TrayCreateItem("Right Third" & @TAB & "Win+Alt+G") ; Postion 4
+	Local $rightTwoThirds = TrayCreateItem("Right Two Thirds" & @TAB & "Win+Alt+T") ; Postion 5
 	TrayCreateItem("") ; Create a separator line.
 
 	; TODO - Next/Previous display
@@ -54,56 +66,102 @@ Func Main()
 	While 1
 		Switch TrayGetMsg()
 			Case $left
-				halves(1)
+				left()
 			Case $right
-				halves(2)
+				right()
 			Case $top
-				halves(3)
+				top()
 			Case $bottom
-				halves(4)
+				bottom()
 			Case $topLeft
-				quadrant(1)
+				topLeft()
 			Case $topRight
-				quadrant(2)
+				topRight()
 			Case $bottomLeft
-				quadrant(3)
+				bottomLeft()
 			Case $bottomRight
-				quadrant(4)
+				bottomRight()
 			Case $leftThird
-				thirds(1)
+				leftThird()
 			Case $leftTwoThirds
-				thirds(2)
+				leftTwoThird()
 			Case $centerThird
-				thirds(3)
+				centerThird()
 			Case $rightThird
-				thirds(4)
+				rightThird()
 			Case $rightTwoThirds
-				thirds(5)
-			Case $exitTray ; Exit the loop.
+				rightTwoThird()
+			Case $exitTray
 				Exit
 		EndSwitch
 	WEnd
-EndFunc   ;==>Example
+EndFunc   ;==>Main
 
 
-Func halves ($newPos)
-	local $curWindow = WinGetHandle("")
-	Switch $newPos
-		Case 1
-			WinMove($curWindow,"", 0,0, $displayWidth/2, $displayHeight/2)
-		Case 2
+Func left()
+	Local $curWindow = WinGetHandle("")
+	WinMove($curWindow, "", 0, 0, $displayWidth / 2, $displayHeight)
+EndFunc   ;==>left
 
-		Case 3
+Func right()
+	Local $curWindow = WinGetHandle("")
+	WinMove($curWindow, "", $displayWidth / 2, 0, $displayWidth / 2, $displayHeight)
+EndFunc   ;==>right
 
-		Case 4
+Func top()
+	Local $curWindow = WinGetHandle("")
+	WinMove($curWindow, "", 0, 0, $displayWidth, $displayHeight / 2)
+EndFunc   ;==>top
 
-		EndSwitch
-EndFunc
+Func bottom()
+	Local $curWindow = WinGetHandle("")
+	WinMove($curWindow, "", 0, $displayWidth / 2, $displayWidth, $displayHeight / 2)
+EndFunc   ;==>bottom
 
-Func quadrant ($newPos)
+Func topLeft()
 
-EndFunc
+EndFunc   ;==>topLeft
 
-Func thirds ($newPos)
+Func topRight()
 
-EndFunc
+EndFunc   ;==>topRight
+
+Func bottomLeft()
+
+EndFunc   ;==>bottomLeft
+
+Func bottomRight()
+
+EndFunc   ;==>bottomRight
+
+Func leftThird()
+
+EndFunc   ;==>leftThird
+
+Func leftTwoThird()
+
+EndFunc   ;==>leftTwoThird
+
+Func rightThird()
+
+EndFunc   ;==>rightThird
+
+Func centerThird()
+
+EndFunc   ;==>centerThird
+
+Func rightTwoThird()
+
+EndFunc   ;==>rightTwoThird
+
+Func maximize()
+
+EndFunc   ;==>maximize
+
+Func center()
+
+EndFunc   ;==>center
+
+Func restore()
+
+EndFunc   ;==>restore
